@@ -1,0 +1,32 @@
+name:  deployment to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs_on: ubuntu-lastest
+    steps:
+      - name: use a checkout
+        uses: actions/checkout@v4
+      - name: get the enviromental variables
+        run: echo "PORT=${{secrets.PORT}}" >> .env
+      - name: log into docker account
+        run: docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}}
+      - name: build the image
+        run: docker build -t wrashtech/fasty .
+      - name: push to docker-hub
+        run: docker push wrashtech/fasty:latest 
+  deploy:
+    needs: build
+    runs_on: self-hosted
+    steps:
+      - name: pull the image from docker-hub 
+        run: docker pull wrashtech/fasty:latest
+      - name: delete old fasty container
+        run: docker rm -f wrashtech/fasty
+      - name: run new container
+        run: docker run -d -p 8000:8000 --name wrashtech/fasty wrashtech/fasty
+      
