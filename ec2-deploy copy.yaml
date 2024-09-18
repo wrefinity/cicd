@@ -8,17 +8,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout code 
+      - name: use a checkout
         uses: actions/checkout@v4
       - name: get the enviromental variables
         run: echo "PORT=${{secrets.PORT}}" >> .env
-      - uses: mr-smithers-excellent/docker-build-push@v6
-        with:
-          tags: v1, latest
-          image: wrashtech/fasty
-          registry: docker.io
-          username: ${{ secrets.DOCKER_USER }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: log into docker account
+        run: docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}}
+      - name: build the image
+        run: docker build -t wrashtech/fasty .
+      - name: push to docker-hub
+        run: docker push wrashtech/fasty:latest 
   deploy:
     needs: build
     runs-on: self-hosted
