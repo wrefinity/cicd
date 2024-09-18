@@ -18,7 +18,7 @@ jobs:
           image: wrashtech/fasty
           registry: docker.io
           username: ${{ secrets.DOCKER_USER }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          password: ${{ secrets.DOCKER_TOKENS }}
   deploy:
     needs: build
     runs-on: self-hosted
