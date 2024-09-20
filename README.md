@@ -1,7 +1,1 @@
- # - uses: mr-smithers-excellent/docker-build-push@v6
-      #   with:
-      #     tags: v1, latest
-      #     image: wrashtech/fasty
-      #     registry: docker.io
-      #     username: ${{ secrets.DOCKER_USER }}
-      #     password: ${{ secrets.DOCKER_TOKENS }}
+ssh -i "cicd_kene.pem" ubuntu@ec2-52-14-201-82.us-east-2.compute.amazonaws.com

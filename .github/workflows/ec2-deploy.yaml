@@ -20,9 +20,9 @@ jobs:
           echo $username
           docker login -u $username -p $password
       - name: build image
-        run: sudo docker build -t wrashtech/fasty .
+        run: sudo docker build -t ${{secrets.DOCKER_USER}}/fasty .
       - name: push image
-        run: sudo docker push wrashtech/fasty:latest
+        run: sudo docker push ${{secrets.DOCKER_USER}}/fasty:latest
        
      
   deploy:
