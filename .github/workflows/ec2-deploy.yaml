@@ -20,9 +20,9 @@ jobs:
           echo $username
           docker login -u $username -p $password
       - name: build image
-        run: docker build -t wrashtech/fasty .
+        run: sudo docker build -t wrashtech/fasty .
       - name: push image
-        run: docker push wrashtech/fasty:latest
+        run: sudo docker push wrashtech/fasty:latest
        
      
   deploy:
@@ -30,9 +30,9 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: pull the image from docker-hub 
-        run: docker pull wrashtech/fasty:latest
+        run: sudo docker pull wrashtech/fasty:latest
       - name: delete old fasty container
-        run: docker rm -f wrashtech/fasty
+        run: sudo docker rm -f wrashtech/fasty
       - name: run new container
-        run: docker run -d -p 8000:8000 --name wrashtech/fasty wrashtech/fasty
+        run: sudo docker run -d -p 8000:8000 --name wrashtech/fasty wrashtech/fasty
       
