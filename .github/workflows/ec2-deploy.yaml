@@ -42,5 +42,5 @@ jobs:
       - name: delete old fasty container
         run:  docker rm -f wrashtech/fasty
       - name: run new container
-        run: docker run -d -p 8000:8000 wrashtech/fasty --name wrashtech/fasty
+        run: docker run -d -p 8000:8000 wrashtech/fasty
       
