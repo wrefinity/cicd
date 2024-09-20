@@ -5,4 +5,4 @@ app = FastAPI()
 
 @app.get("/")
 async def main():
-    return {"message": "CICD with git action to AWS EC2"}
+    return {"message": "CICD with git action to AWS EC2 Instances"}
