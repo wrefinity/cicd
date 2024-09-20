@@ -37,10 +37,12 @@ jobs:
     needs: build
     runs-on: self-hosted
     steps:
+      - name: Kill process using port 8000
+        run: sudo kill -9 $(sudo lsof -t -i:8000)
       - name: pull the image from docker-hub 
         run: docker pull wrashtech/fasty:latest
       - name: delete old fasty container
-        run:  docker rm -f fasty
+        run: docker rm -f fasty || true
       - name: run new container
         run: docker run -d -p 8000:8000 --name fasty wrashtech/fasty
       
