@@ -40,7 +40,7 @@ jobs:
       - name: pull the image from docker-hub 
         run: docker pull wrashtech/fasty:latest
       - name: delete old fasty container
-        run:  docker rm -f wrashtech/fasty
+        run:  docker rm -f fasty
       - name: run new container
-        run: docker run -d -p 8000:8000 wrashtech/fasty
+        run: docker run -d -p 8000:8000 --name fasty wrashtech/fasty
       
